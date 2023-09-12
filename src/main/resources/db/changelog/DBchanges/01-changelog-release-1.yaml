@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - preConditions:
+
+  - changeSet:
+      id: 1
+      author: jakeChrysler
+      changes:
+        - createTable:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: ${textColumnType}
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: author_id
+                  type: int
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: authors
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: ${textColumnType}
+                  constraints:
+                    nullable: false
+
+
+        - addForeignKeyConstraint:
+            baseTableName: books
+            baseColumnNames: author_id
+            constraintName: author_fk
+            referencedTableName: authors
+            referencedColumnNames: id
+
+        - sqlFile:
+            dbms: 'h2,  oracle,  mysql'
+            endDelimiter: ";"
+            splitStatements: true
+            path: db/changelog/DBchanges/01-insert-data-authors,books.sql
+            stripComments: true

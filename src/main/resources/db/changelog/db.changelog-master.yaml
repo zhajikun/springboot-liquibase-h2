@@ -1,0 +1,7 @@
+databaseChangeLog:
+  -
+  - include:
+      file: db/changelog/DBchanges/01-changelog-release-1.yaml
+
+#  - include:
+#      file: db/changelog/DBchanges/01-insert-data-authors,books.sql

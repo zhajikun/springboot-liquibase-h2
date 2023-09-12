@@ -1,0 +1,70 @@
+server:
+  port: 8095
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+
+  jmx:
+    enabled: false
+
+  mvc:
+    log-request-details: true
+    dispatch-options-request: true
+
+  datasource:
+    url: jdbc:mysql://10.97.1.162:3306/identities?useSSL=false
+    username: iridium
+    password: iridiumPwd123$
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    tomcat:
+      max-active: 5
+      test-while-idle: true
+      validation-query: SELECT 1 FROM DUEL
+      validation-interval: 180000
+
+
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+#        ddl-auto: none
+        hbm2ddl:
+          auto: none
+        show_sql: false
+        format_sql: false
+    open-in-view: false
+
+  #All spring liquibase coonfig:  https://reflectoring.io/database-migration-spring-boot-liquibase/
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    parameters:
+      textColumnType: VARCHAR(255)
+    contexts: local
+
+
+  thymeleaf:
+    prefix: classpath:/templates
+    suffix: .html
+
+logging:
+  level:
+    sql: info
+    liquibase: info
+    root: info
+
+password:
+  reset:
+    token:
+      lifetime:
+        hours: 4
+
+software:
+  iridium:
+    api:
+      ttl:
+        minutes: 30
+
+
