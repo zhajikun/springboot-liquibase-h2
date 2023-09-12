@@ -23,18 +23,18 @@ databaseChangeLog:
                     nullable: false
                     unique: true
 
-              - column:
-                  name: author_id
-                  type: int
-                  constraints:
-                    nullable: true
+#              - column:
+#                  name: author_id
+#                  type: int
+#                  constraints:
+#                    nullable: true
 
-        - addForeignKeyConstraint:
-            baseTableName: publisher
-            baseColumnNames: author_id
-            constraintName: publisher_fk
-            referencedTableName: authors
-            referencedColumnNames: id
+#        - addForeignKeyConstraint:
+#            baseTableName: publisher
+#            baseColumnNames: author_id
+#            constraintName: publisher_fk
+#            referencedTableName: authors
+#            referencedColumnNames: id
 
         - sqlFile:
             dbms: 'h2,  oracle,  mysql'

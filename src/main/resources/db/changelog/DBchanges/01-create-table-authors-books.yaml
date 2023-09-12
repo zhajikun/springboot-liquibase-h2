@@ -22,11 +22,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: true
-              - column:
-                  name: author_id
-                  type: int
-                  constraints:
-                    nullable: false
+
+
 
         - createTable:
             tableName: authors
@@ -46,12 +43,6 @@ databaseChangeLog:
                     nullable: false
 
 
-        - addForeignKeyConstraint:
-            baseTableName: books
-            baseColumnNames: author_id
-            constraintName: author_fk
-            referencedTableName: authors
-            referencedColumnNames: id
 
         - sqlFile:
             dbms: 'h2,  oracle,  mysql'
