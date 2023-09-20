@@ -1,7 +1,10 @@
 databaseChangeLog:
-  -
-  - include:
-      file: db/changelog/DBchanges/01-changelog-release-1.yaml
 
-#  - include:
-#      file: db/changelog/DBchanges/01-insert-data-authors,books.sql
+  - include:
+      file: db/changelog/DBchanges/01-create-table-authors-books.yaml
+
+  - include:
+      file: db/changelog/DBchanges/02-create-table-publisher.yaml
+
+  - include:
+      file: db/changelog/DBchanges/01-init-tables.yaml
