@@ -33,7 +33,6 @@ databaseChangeLog:
                     nullable: false
                     unique: true
 
-
         - createTable:
             tableName: authors
             columns:
