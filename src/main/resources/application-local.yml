@@ -1,5 +1,5 @@
 server:
-  port: 8095
+  port: 8096
 
 spring:
   datasource:
@@ -18,7 +18,7 @@ spring:
   h2:
     console:
       enabled: true
-      path: /h2-ui
+#      path: /h2-ui
 
   #All spring liquibase coonfig:  https://reflectoring.io/database-migration-spring-boot-liquibase/
   liquibase:
@@ -26,6 +26,9 @@ spring:
     parameters:
       textColumnType: VARCHAR(255)
     contexts: local
+  sql:
+    init:
+      platform: h2
 
 
 logging:

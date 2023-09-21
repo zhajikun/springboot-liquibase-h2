@@ -4,6 +4,12 @@ databaseChangeLog:
   - changeSet:
       id: 2
       author: jakeChrysler
+      preConditions:
+        - onFail: MARK_RAN
+        - onError: MARK_RAN
+        - not:
+            - tableExists:
+                - tableName: publisher
       changes:
         - createTable:
             tableName: publisher
