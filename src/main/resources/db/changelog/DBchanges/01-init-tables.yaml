@@ -1550,26 +1550,164 @@ databaseChangeLog:
                   type: ${textColumnType}
 
 
+        ### add Foreignkey relation
+        # 1. access_tokens
+        - addForeignKeyConstraint:
+            baseColumnNames: refresh_token_id
+            baseTableName: access_tokens
+            constraintName: fk_access_token
+            referencedColumnNames: refresh_token_id
+            referencedTableName: refresh_tokens
 
 
+        # 2. external_identity_providers
+        - addForeignKeyConstraint:
+            baseColumnNames: external_identity_provider_template_id
+            baseTableName: external_identity_providers
+            constraintName: fk_external_identity_providers_template
+            referencedColumnNames: external_identity_provider_template_id
+            referencedTableName: external_identity_provider_templates
 
+        - addForeignKeyConstraint:
+            baseColumnNames: tenant_id
+            baseTableName: external_identity_providers
+            constraintName: fk_external_identity_providers_tenant
+            referencedColumnNames: tenant_id
+            referencedTableName: tenants
 
+        - addForeignKeyConstraint:
+            baseColumnNames: external_identity_provider_id
+            baseTableName: external_identity_providers
+            constraintName: fk_external_identity_providers_authorization
+            referencedColumnNames: external_identity_provider_id
+            referencedTableName: authorization_parameters
 
+        - addForeignKeyConstraint:
+            baseColumnNames: external_identity_provider_id
+            baseTableName: external_identity_providers
+            constraintName: fk_external_identity_providers_acccess_token
+            referencedColumnNames: external_identity_provider_id
+            referencedTableName: access_token_parameters
 
+        # 3. tenants
+        - addForeignKeyConstraint:
+            baseColumnNames: tenant_id
+            baseTableName: tenants
+            constraintName: fk_tenants_identies
+            referencedColumnNames: identity_id
+            referencedTableName: tenants_identities_xref
 
+        - addForeignKeyConstraint:
+            baseColumnNames: tenant_id
+            baseTableName: identity_email_addresses
+            constraintName: fk_tenants_login_descriptor
+            referencedColumnNames: login_descriptor_id
+            referencedTableName: login_descriptors
 
+        # 4. identity_email_addresses
+        - addUniqueConstraint:
+             columnNames: identity_id, email_address
+             tableName: identity_email_addresses
+             constraintName: identity_email_addresses_uniq
 
+        - addForeignKeyConstraint:
+            baseColumnNames: identity_id
+            baseTableName: identity_email_addresses
+            constraintName: fk_identity_email_addresses_identity
+            referencedColumnNames: identity_id
+            referencedTableName: identities
 
+        # 5. client_secrets
+        - addForeignKeyConstraint:
+            baseColumnNames: application_id
+            baseTableName: identity_email_addresses
+            constraintName: fk_identity_email_addresses_application
+            referencedColumnNames: application_id
+            referencedTableName: applications
 
+        # 6. identity_property
+        - addForeignKeyConstraint:
+            baseColumnNames: identity_id
+            baseTableName: identity_property
+            constraintName: fk_identity_property_identitie
+            referencedColumnNames: identity_id
+            referencedTableName: identities
 
+        # 7. applications
+        - addForeignKeyConstraint:
+            baseColumnNames: application_id
+            baseTableName: applications
+            constraintName: fk_applications_identites_xref
+            referencedColumnNames: application_id
+            referencedTableName: identities_applications
 
+        - addForeignKeyConstraint:
+            baseColumnNames: application_type_id
+            baseTableName: applications
+            constraintName: fk_applications_application_type
+            referencedColumnNames: application_type_id
+            referencedTableName: application_types
 
+        # 8. external_identity_provider_parameters
+        - addForeignKeyConstraint:
+            baseColumnNames: external_identity_provider_id
+            baseTableName: external_identity_provider_parameters
+            constraintName: fk_external_identity_provider_parameters
+            referencedColumnNames: external_identity_provider_id
+            referencedTableName: external_identity_providers
 
+        # 9. roles
+        - addForeignKeyConstraint:
+            baseColumnNames: group_id
+            baseTableName: roles
+            constraintName: fk_roles
+            referencedColumnNames: role_id
+            referencedTableName: roles_identities_xref
 
+        # 10. identity_create_session_details
+        - addForeignKeyConstraint:
+            baseColumnNames: identity_id
+            baseTableName: identity_create_session_details
+            constraintName: fk_identity_create_session_details
+            referencedColumnNames: identity_id
+            referencedTableName: identities
 
+        # 11. identity_create_session_details
+        - addForeignKeyConstraint:
+            baseColumnNames: external_identity_provider_id
+            baseTableName: in_progress_external_identity_provider_authorizations
+            constraintName: fk_in_progress_external_identity_provider_authorizations
+            referencedColumnNames: external_identity_provider_id
+            referencedTableName: external_identity_providers
 
+        # 12. identities
+        - addForeignKeyConstraint:
+            baseColumnNames: identity_id
+            baseTableName: identities
+            constraintName: fk_identities_tenant_xref
+            referencedColumnNames: identity_id
+            referencedTableName: tenants_identities_xref
 
+        - addForeignKeyConstraint:
+            baseColumnNames: identity_id
+            baseTableName: identities
+            constraintName: fk_identities_application
+            referencedColumnNames: identity_id
+            referencedTableName: identities_applications
 
+        - addForeignKeyConstraint:
+            baseColumnNames: profile_id
+            baseTableName: identities
+            constraintName: fk_identities_profiles
+            referencedColumnNames: profile_id
+            referencedTableName: profiles
+
+        - addForeignKeyConstraint:
+            baseColumnNames: profile_id
+            baseTableName: identities
+            constraintName: fk_identities_profiles
+            referencedColumnNames: profile_id
+            referencedTableName: profiles
 
 
 
