@@ -18,7 +18,7 @@ spring:
   h2:
     console:
       enabled: true
-#      path: /h2-ui
+      path: /h2-ui
 
   #All spring liquibase coonfig:  https://reflectoring.io/database-migration-spring-boot-liquibase/
   liquibase:
