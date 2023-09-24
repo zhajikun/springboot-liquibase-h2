@@ -1589,10 +1589,9 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             baseColumnNames: identity_email_id
             baseTableName: email_verification_tokens
-            constraintName: fk_client_secrets_application
-            referencedColumnNames: identity_email_id
+            constraintName: fk_email_verification_tokens
+            referencedColumnNames: identity_email_address_id
             referencedTableName: identity_email_addresses
-
 
         # 5. external_identity_providers
         - addForeignKeyConstraint:
@@ -1685,23 +1684,7 @@ databaseChangeLog:
             referencedColumnNames: external_identity_provider_id
             referencedTableName: external_identity_providers
 
-        # 11. identity_create_session_details
-        - addForeignKeyConstraint:
-            baseColumnNames: external_identity_provider_id
-            baseTableName: in_progress_external_identity_provider_authorizations
-            constraintName: fk_in_progress_external_identity_provider_authorizations
-            referencedColumnNames: external_identity_provider_id
-            referencedTableName: external_identity_providers
-
-        # 13. identity_property
-        - addForeignKeyConstraint:
-            baseColumnNames: identity_id
-            baseTableName: identity_property
-            constraintName: fk_identity_property
-            referencedColumnNames: identity_id
-            referencedTableName: identities
-
-        # 16. scopes
+        # 15. scopes
         - addForeignKeyConstraint:
             baseColumnNames: application_id
             baseTableName: scopes
